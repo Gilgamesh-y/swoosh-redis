@@ -3,7 +3,7 @@
 namespace Src\Redis;
 
 use Src\App;
-use Src\Core\Contexts\RedisContext;
+use Src\Redis\RedisContext;
 
 class RedisManager
 {
@@ -108,7 +108,7 @@ class RedisManager
             if (!$obj) {
                 return false;
             }
-            RedisContext::set(function () use ($obj, $method, $parameters) {
+            RedisContext::set('', function () use ($obj, $method, $parameters) {
                 return $obj['db']->{$method}(...$parameters);
             });
             $result = RedisContext::get();
