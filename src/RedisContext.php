@@ -14,6 +14,8 @@ class RedisContext extends Context
 
     public static function __callStatic($method, $arguments)
     {
-        return App::get('context_redis')->$method(...$arguments);
+        if ($context_redis = App::get('context_redis')) {
+            return $context_redis->$method(...$arguments);
+        }
     }
 }
